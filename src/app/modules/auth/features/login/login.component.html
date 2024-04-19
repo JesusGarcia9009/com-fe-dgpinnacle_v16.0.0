@@ -14,8 +14,8 @@
 
                         <div class="row" class="mt-4" style="overflow: hidden;">
                             <form class="form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" autocomplete="off">
-                                <mat-form-field class="pr-4 pl-4 has-label">
-                                    <mat-icon matSuffix>username</mat-icon>
+                                <mat-form-field class="pr-4 pl-4 has-label mt-1">
+                                    <mat-label>Email</mat-label>
                                     <input matInput formControlName="username" placeholder="Email" type="username" autocomplete="off">
                                     <mat-error *ngIf="loginFormControls['username'].hasError('username') && (loginFormControls['username'].dirty || loginFormControls['username'].touched)">
                                         Por favor ingrese un username válido
@@ -26,6 +26,7 @@
                                 </mat-form-field>
                             
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
+                                    <mat-label>Password</mat-label>
                                     <mat-icon *ngIf="isShowPassword" (click)="turnOffPassword()" matSuffix>visibility</mat-icon>
                                     <mat-icon *ngIf="!isShowPassword" (click)="turnOffPassword()" matSuffix>visibility_off</mat-icon>
                                     <input matInput formControlName="password" placeholder="Password" [attr.type]="passwordType" autocomplete="off">
