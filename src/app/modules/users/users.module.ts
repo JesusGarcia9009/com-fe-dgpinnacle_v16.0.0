@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DataTablesModule } from 'angular-datatables';
-import { MaterialModule } from 'src/app/app.module';
+// import { DataTablesModule } from 'angular-datatables';
 import { CoreModule } from '../core/core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { usersPagesRoutes } from './users.routing';
@@ -13,6 +12,7 @@ import { LoanAddUpdateComponent } from './loan-add-update/loan-add-update.compon
 import { RealtorAddUpdateComponent } from './realtor-add-update/realtor-add-update.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ClientAddUpdateComponent } from './client-add-update/client-add-update.component';
+import { MaterialModule } from 'src/app/app.material.module';
 
 
 
@@ -25,8 +25,9 @@ import { ClientAddUpdateComponent } from './client-add-update/client-add-update.
     FormsModule,
     MaterialModule,
     CoreModule,
-    DataTablesModule,
+    // DataTablesModule,
     SharedModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UsersModule { }

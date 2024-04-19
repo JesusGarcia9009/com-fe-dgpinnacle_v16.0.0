@@ -1,14 +1,17 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataTableDirective } from 'angular-datatables';
+// import { DataTableDirective } from 'angular-datatables';
 import { Subscription, Subject } from 'rxjs';
 import { LoadingService } from '../../core/core/services/loading.service';
 import { ModalService } from '../../core/core/services/modal.service';
 import { SharedService } from '../../shared/shared.service';
 import { UserModel } from '../model/user.model';
 import { UserService } from '../services/user.service';
-import DataTables from 'datatables.net';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+// import DataTables from 'datatables.net';
 
 @Component({
   selector: 'app-users-main',
@@ -19,6 +22,12 @@ export class UsersMainComponent implements OnInit, OnDestroy {
 
   tabIndex: number = 0;
 
+  displayedColumns: string[] = ['name', 'email', 'cellphone', 'profileName', 'actions'];
+  
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   public subscriptions: Array<Subscription> = [];
 
   public allUsersListData: Array<UserModel> = [];
@@ -27,33 +36,15 @@ export class UsersMainComponent implements OnInit, OnDestroy {
   public realtorListData: Array<UserModel> = [];
   public clientListData: Array<UserModel> = [];
   public viewerListData: Array<UserModel> = [];
+  public administratorListData: Array<UserModel> = [];
+
+  dataSourceLoan: MatTableDataSource<UserModel>;
+  dataSourceRealtor: MatTableDataSource<UserModel>;
+  dataSourceClient: MatTableDataSource<UserModel>;
+  dataSourceViewer: MatTableDataSource<UserModel>;
+  dataSourceAdministrators: MatTableDataSource<UserModel>;
 
   //common
-  dtOptions: any = {};
-  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
-
-  //loan
-  public tblDataLoan: UserModel[] = [];
-  public dtTriggerLoan: Subject<any> = new Subject();
-
-
-  //realtor
-  public tblDataRealtor: UserModel[] = [];
-  public dtTriggerRealtor: Subject<any> = new Subject();
-
-  //client
-  public tblDataClient: UserModel[] = [];
-  public dtTriggerClient: Subject<any> = new Subject();
-
-  //viewer
-  public tblDataViewer: UserModel[] = [];
-  public dtTriggerViewer: Subject<any> = new Subject();
-
-  //viewer
-  public tblDataAdministrators: UserModel[] = [];
-  public dtTriggerAdministrators: Subject<any> = new Subject();
-
   constructor(
     private userService: UserService,
     private sharedService: SharedService,
@@ -92,69 +83,53 @@ export class UsersMainComponent implements OnInit, OnDestroy {
     }));
   }
 
-  async initializeLoanTable() {
-    this.dtOptions = this.getDtOptions();
-
+  initializeLoanTable() {
     this.loanListData = this.allUsersListData.filter(x => x.profileCode === "LOAN");
-    this.tblDataLoan = this.loanListData;
+    this.dataSourceLoan = new MatTableDataSource(this.loanListData);
 
-    const dtInstance = await this.dtElement.dtInstance;
-    if (dtInstance) {
-      dtInstance.destroy();
-    }
-    this.dtTriggerLoan.next(true);
+    this.dataSourceLoan.paginator = this.paginator;
+    this.dataSourceLoan.sort = this.sort;
   }
 
+  
+
   async initializeRealtorTable() {
-    this.dtOptions = this.getDtOptions();
-
     this.realtorListData = this.allUsersListData.filter(x => x.profileCode === "REALTOR");
-    this.tblDataRealtor = this.realtorListData;
+    this.dataSourceRealtor = new MatTableDataSource(this.realtorListData);
 
-    const dtInstance = await this.dtElement.dtInstance;
-    if (dtInstance) {
-      dtInstance.destroy();
-    }
-    this.dtTriggerRealtor.next(true);
+    this.dataSourceRealtor.paginator = this.paginator;
+    this.dataSourceRealtor.sort = this.sort;
   }
 
   async initializeClientTable() {
-    this.dtOptions = this.getDtOptions();
-
     this.clientListData = this.allUsersListData.filter(x => x.profileCode === "CLIENT");
-    this.tblDataClient = this.clientListData;
+    this.dataSourceClient = new MatTableDataSource(this.clientListData);
 
-    const dtInstance = await this.dtElement.dtInstance;
-    if (dtInstance) {
-      dtInstance.destroy();
-    }
-    this.dtTriggerClient.next(true);
+    this.dataSourceClient.paginator = this.paginator;
+    this.dataSourceClient.sort = this.sort;
   }
 
   async initializeViewerTable() {
-    this.dtOptions = this.getDtOptions();
-
     this.viewerListData = this.allUsersListData.filter(x => x.profileCode != "REALTOR" && x.profileCode != "LOAN"  && x.profileCode != "ADMINISTRATOR");
-    this.tblDataViewer = this.viewerListData;
+    this.dataSourceViewer = new MatTableDataSource(this.viewerListData);
 
-    const dtInstance = await this.dtElement.dtInstance;
-    if (dtInstance) {
-      dtInstance.destroy();
-    }
-    this.dtTriggerViewer.next(true);
+    this.dataSourceViewer.paginator = this.paginator;
+    this.dataSourceViewer.sort = this.sort;
   }
 
   async initializeAdministratorsTable() {
-    this.dtOptions = this.getDtOptions();
+    this.administratorListData = this.allUsersListData.filter(x => x.profileCode === "ADMINISTRATOR");
+    this.dataSourceAdministrators = new MatTableDataSource(this.administratorListData);
 
-    this.viewerListData = this.allUsersListData.filter(x => x.profileCode === "ADMINISTRATOR");
-    this.tblDataAdministrators = this.viewerListData;
+    this.dataSourceAdministrators.paginator = this.paginator;
+    this.dataSourceAdministrators.sort = this.sort;
+  }
 
-    const dtInstance = await this.dtElement.dtInstance;
-    if (dtInstance) {
-      dtInstance.destroy();
-    }
-    this.dtTriggerAdministrators.next(true);
+  applyFilter(event: KeyboardEvent) {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSourceLoan.filter = filterValue;
   }
 
   redirectToEdit(user: UserModel, type: string) {

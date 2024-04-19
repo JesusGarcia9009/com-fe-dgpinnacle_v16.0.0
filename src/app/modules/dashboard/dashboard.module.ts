@@ -6,7 +6,7 @@ import { MdModule } from '../../md/md.module';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
-import { MaterialModule } from 'src/app/app.module';
+import { MaterialModule } from 'src/app/app.material.module';
 
 @NgModule({
     imports: [

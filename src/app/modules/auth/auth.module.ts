@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { PagesRoutes } from './auth.routing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core/core.module';
-import { MaterialModule } from 'src/app/app.module';
+import { MaterialModule } from 'src/app/app.material.module';
 
 
 
