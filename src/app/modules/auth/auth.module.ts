@@ -4,8 +4,8 @@ import { LoginComponent } from './features/login/login.component';
 import { RouterModule } from '@angular/router';
 import { PagesRoutes } from './auth.routing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MaterialModule } from 'src/app/angular.module';
 import { CoreModule } from '../core/core/core.module';
+import { MaterialModule } from 'src/app/app.module';
 
 
 

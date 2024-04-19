@@ -41,77 +41,59 @@
                         </div>
                     </mat-tab>
                     <mat-tab label="Register">
-                        <!-- <div class="row" class="mt-4" style="overflow: hidden;">
-                            <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()"
-                                autocomplete="off">
+                        <div class="row" class="mt-4" style="overflow: hidden;">
+                            <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" autocomplete="off">
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
-                                    <input matInput formControlName="name" placeholder="* Name" type="input"
-                                        autocomplete="off">
-                                    <mat-error *ngIf="(registerFormControls['name'].dirty || registerFormControls['name'].touched) 
-                                            && registerFormControls['name'].errors?.required">
+                                    <input matInput formControlName="name" placeholder="* Name" type="input" autocomplete="off">
+                                    <mat-error *ngIf="registerFormControls['name'].hasError('required') && (registerFormControls['name'].dirty || registerFormControls['name'].touched)">
                                         The "name" field is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
-                                    <input id="lastName" matInput formControlName="lastName" placeholder="* Last name"
-                                        type="input" autocomplete="nope">
-                                    <mat-error *ngIf="(registerFormControls['lastName'].dirty || registerFormControls['lastName'].touched) 
-                                            && registerFormControls['lastName'].errors?.required">
+                                    <input id="lastName" matInput formControlName="lastName" placeholder="* Last name" type="input" autocomplete="nope">
+                                    <mat-error *ngIf="registerFormControls['lastName'].hasError('required') && (registerFormControls['lastName'].dirty || registerFormControls['lastName'].touched)">
                                         The "lastName" field is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
-                                    <input id="email" matInput formControlName="email" placeholder="* Email"
-                                        type="input" autocomplete="nope">
-                                    <mat-error *ngIf="(registerFormControls['email'].dirty || registerFormControls['email'].touched) 
-                                            && registerFormControls['email'].errors?.required">
+                                    <input id="email" matInput formControlName="email" placeholder="* Email" type="input" autocomplete="nope">
+                                    <mat-error *ngIf="registerFormControls['email'].hasError('required') && (registerFormControls['email'].dirty || registerFormControls['email'].touched)">
                                         The "email" field is <strong>required</strong>
                                     </mat-error>
-                                    <mat-error
-                                        *ngIf="(registerFormControls['email'].dirty || registerFormControls['email'].touched) && 
-                                        registerFormControls['email'].errors?.email">
+                                    <mat-error *ngIf="registerFormControls['email'].hasError('email') && (registerFormControls['email'].dirty || registerFormControls['email'].touched)">
                                         Please enter a valid email
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
-                                    <input id="cellphone" matInput formControlName="cellphone" placeholder="* Cellphone"
-                                        type="input" autocomplete="nope">
-                                    <mat-error *ngIf="(registerFormControls['cellphone'].dirty || registerFormControls['cellphone'].touched) 
-                                            && registerFormControls['cellphone'].errors?.required">
+                                    <input id="cellphone" matInput formControlName="cellphone" placeholder="* Cellphone" type="input" autocomplete="nope">
+                                    <mat-error *ngIf="registerFormControls['cellphone'].hasError('required') && (registerFormControls['cellphone'].dirty || registerFormControls['cellphone'].touched)">
                                         The "cellphone" field is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
-                                    <input id="mailingAdd" matInput formControlName="mailingAdd"
-                                        placeholder="Mailing Address" type="input" autocomplete="nope">
+                                    <input id="mailingAdd" matInput formControlName="mailingAdd" placeholder="Mailing Address" type="input" autocomplete="nope">
                                 </mat-form-field>
-
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
-                                    <input matInput formControlName="password" placeholder="Password" type="password"
-                                        autocomplete="off">
-                                    <mat-error *ngIf="(registerFormControls['password'].dirty || registerFormControls['password'].touched) 
-                                            && registerFormControls['password'].errors?.required">
+                                    <input matInput formControlName="password" placeholder="Password" type="password" autocomplete="off">
+                                    <mat-error *ngIf="registerFormControls['password'].hasError('required') && (registerFormControls['password'].dirty || registerFormControls['password'].touched)">
                                         Password is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="example-full-width pr-4 pl-4 mt-1">
-                                    <input matInput formControlName="confirmPassword" placeholder="Confirm Password"
-                                        type="password" autocomplete="off">
-                                    <mat-error *ngIf="(registerFormControls['confirmPassword'].dirty || registerFormControls['confirmPassword'].touched) 
-                                            && registerFormControls['confirmPassword'].errors?.required">
+                                    <input matInput formControlName="confirmPassword" placeholder="Confirm Password" type="password" autocomplete="off">
+                                    <mat-error *ngIf="registerFormControls['confirmPassword'].hasError('required') && (registerFormControls['confirmPassword'].dirty || registerFormControls['confirmPassword'].touched)">
                                         Confirm password is <strong>required</strong>
                                     </mat-error>
-                                    <mat-error
-                                        *ngIf="registerFormControls['confirmPassword'].errors && registerFormControls['confirmPassword'].errors.mustMatch">
+                                    <mat-error *ngIf="registerFormControls['confirmPassword'].hasError('mustMatch')">
                                         Passwords must match
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="row mr-4 ml-4 mt-1">
-                                <button class="btn btn-info btn-login" type="submit"
-                                    [disabled]="!registerForm.valid">register</button>
+                                    <button class="btn btn-info btn-login" type="submit" [disabled]="!registerForm.valid">register</button>
                                 </div>
                             </form>
-                        </div> -->
+                            
+                        </div>
                     </mat-tab>
                 </mat-tab-group>
 

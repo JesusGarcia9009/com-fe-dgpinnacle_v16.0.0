@@ -1,0 +1,262 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="main-content">
+                    <div class="container-fluid">
+                        <form [formGroup]="registerForm" (ngSubmit)="onCalculateSubmit()">
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="card ">
+                                                <div class="card-header card-header-rose card-header-icon">
+                                                    <div class="card-icon">
+                                                        <i class="material-icons">attach_money</i>
+                                                    </div>
+                                                    <h4 class="card-title">Calculator</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <mat-form-field class="example-chip-list">
+                                                                <mat-chip-list #chipList>
+                                                                    <mat-chip *ngFor="let client of clients"
+                                                                        [selectable]="selectable"
+                                                                        [removable]="removable"
+                                                                        (removed)="remove(client)">
+                                                                        {{client.name}}
+                                                                        <mat-icon matChipRemove
+                                                                            *ngIf="removable">cancel</mat-icon>
+                                                                    </mat-chip>
+                                                                    <input
+                                                                        placeholder="* Write down the names of the clients and press enter"
+                                                                        [matChipInputFor]="chipList"
+                                                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                                        [matChipInputAddOnBlur]="addOnBlur"
+                                                                        (matChipInputTokenEnd)="add($event)">
+                                                                </mat-chip-list>
+                                                            </mat-form-field>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <mat-select placeholder="* LoanType"
+                                                                    formControlName="loanType" name="loanType">
+                                                                    <mat-option value="FHA">FHA </mat-option>
+                                                                    <mat-option
+                                                                        value="Conventional">Conventional</mat-option>
+                                                                </mat-select>
+                                                                <mat-error *ngIf="(registerFormControls.loanType.dirty || registerFormControls.loanType.touched) 
+                                                        && registerFormControls.loanType.errors?.required">
+                                                                    The "loanType" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="loanAmount"
+                                                                    placeholder="* LoanAmount" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.loanAmount.dirty || registerFormControls.loanAmount.touched) 
+                                                            && registerFormControls.loanAmount.errors?.required">
+                                                                    The "loanAmount" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <hr style="border-top: 1px solid #d5d5d5;">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="location"
+                                                                    placeholder="* Location" autocomplete="off"
+                                                                    type="input">
+                                                                <mat-error *ngIf="(registerFormControls.location.dirty || registerFormControls.location.touched) 
+                                                                && registerFormControls.location.errors?.required">
+                                                                    The "location" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="price"
+                                                                    placeholder="* Price" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.price.dirty || registerFormControls.price.touched) 
+                                                                && registerFormControls.price.errors?.required">
+                                                                    The "price" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="interest"
+                                                                    placeholder="* Interest (%)" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.interest.dirty || registerFormControls.interest.touched) 
+                                                                && registerFormControls.interest.errors?.required">
+                                                                    The "interest" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="mi"
+                                                                    placeholder="* MI (%)" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.mi.dirty || registerFormControls.mi.touched) 
+                                                                && registerFormControls.mi.errors?.required">
+                                                                    The "mi" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="insurance"
+                                                                    placeholder="* Insurance (montlhy)"
+                                                                    autocomplete="off" type="number">
+                                                                <mat-error *ngIf="(registerFormControls.insurance.dirty || registerFormControls.insurance.touched) 
+                                                                && registerFormControls.insurance.errors?.required">
+                                                                    The "insurance" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="taxes"
+                                                                    placeholder="* Taxes (montlhy)" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.taxes.dirty || registerFormControls.taxes.touched) 
+                                                                && registerFormControls.taxes.errors?.required">
+                                                                    The "taxes" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="loanTerm"
+                                                                    placeholder="* LoanTerm (months)" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.loanTerm.dirty || registerFormControls.loanTerm.touched) 
+                                                                && registerFormControls.loanTerm.errors?.required">
+                                                                    The "loanTerm" field is <strong>required</strong>
+                                                                </mat-error>
+                                                                <mat-error
+                                    *ngIf="registerFormControls.loanTerm.errors?.min">
+                                    Please enter a valid number (>0)
+                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="ltv"
+                                                                    placeholder="* Ltv (%)" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.ltv.dirty || registerFormControls.ltv.touched) 
+                                                                && registerFormControls.ltv.errors?.required">
+                                                                    The "ltv" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="maxPay"
+                                                                    placeholder="* MaxPay" autocomplete="off"
+                                                                    type="number">
+                                                                <mat-error *ngIf="(registerFormControls.maxPay.dirty || registerFormControls.maxPay.touched) 
+                                                                && registerFormControls.maxPay.errors?.required">
+                                                                    The "maxPay" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+
+                                                            <mat-form-field>
+                                                                <input matInput formControlName="hoa" type="number"
+                                                                    placeholder="* HOA (montlhy)" autocomplete="off">
+                                                                <mat-error *ngIf="(registerFormControls.hoa.dirty || registerFormControls.hoa.touched) 
+                                                                && registerFormControls.hoa.errors?.required">
+                                                                    The "hoa" field is <strong>required</strong>
+                                                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <button (click)="goBack()" mat-raised-button type="button"
+                                                                class="btn btn-fill btn-default">
+                                                                Go Back</button>
+
+                                                            <button mat-raised-button type="submit"
+                                                                [disabled]="!registerForm.valid"
+                                                                class="btn btn-fill btn-rose">Calculate</button>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div>
+                                                                <div class="row d-flex align-items-center" *ngIf="state === 'Aproved'">
+                                                                    <mat-icon style="font-size: 48px; color: #231E79;">check_circle_outline</mat-icon>
+                                                                    <p style="font-size: 48px; color: #231E79; margin-left: 7%;
+                                                                    margin-top: 11%;">{{ state }}</p>
+                                                                </div>
+                                                                <p *ngIf="maxpay">Monthly Payment: $<span>{{ maxpay }}</span></p>
+                                                            </div>
+                                                            <div>
+                                                                <div class="row d-flex align-items-center" *ngIf="state === 'Not Approved'">
+                                                                    <mat-icon style="font-size: 48px; color: red;">block</mat-icon>
+                                                                    <p style="font-size: 40px; color: red; margin-left: 7%;
+                                                                    margin-top: 11%;">{{ state }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

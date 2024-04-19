@@ -12,8 +12,13 @@ export class AuthGuardService implements CanActivate {
   }
 
   isAuthenticated(): boolean {
-    if (sessionStorage.getItem('token')) { return true; }
+    if (sessionStorage.getItem('token')) {
+      return true;
+    } else {
+      return false;
+    }
   }
+  
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.isAuthenticated()) {

@@ -16,7 +16,14 @@ export const AppRoutes: Routes = [
                 path: '',
                 //loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
                 loadChildren: () => import('./modules/dashboard/dashboard.module').then(x => x.DashboardModule)
-            }//,
+            },
+            {
+                path: '',
+                loadChildren: () => import('./modules/users/users.module').then(x => x.UsersModule)
+            }
+
+
+            //,
             //{
             //    path: '',
             //    loadChildren: () => import('./modules/letter/letter.module').then(x => x.LetterModule)
