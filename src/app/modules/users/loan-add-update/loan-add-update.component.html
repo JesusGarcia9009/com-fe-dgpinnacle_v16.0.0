@@ -15,6 +15,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Name</mat-label>
                                         <input matInput formControlName="name" placeholder="* Name" type="input" autocomplete="off">
                                         <mat-error *ngIf="registerUserFormControls['name'].hasError('required') && (registerUserFormControls['name'].dirty || registerUserFormControls['name'].touched)">
                                             The "name" field is <strong>required</strong>
@@ -23,6 +24,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Last name</mat-label>
                                         <input id="lastName" matInput formControlName="lastName" placeholder="* Last name" type="input" autocomplete="nope">
                                         <mat-error *ngIf="registerUserFormControls['lastName'].hasError('required') && (registerUserFormControls['lastName'].dirty || registerUserFormControls['lastName'].touched)">
                                             The "lastName" field is <strong>required</strong>
@@ -33,6 +35,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Email</mat-label>
                                         <input id="email" matInput formControlName="email" placeholder="* Email" type="input" autocomplete="nope">
                                         <mat-error *ngIf="registerUserFormControls['email'].hasError('required') && (registerUserFormControls['email'].dirty || registerUserFormControls['email'].touched)">
                                             The "email" field is <strong>required</strong>
@@ -44,6 +47,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Cellphone</mat-label>
                                         <input id="cellphone" matInput formControlName="cellphone" placeholder="* Cellphone" type="input" autocomplete="nope">
                                         <mat-error *ngIf="registerUserFormControls['cellphone'].hasError('required') && (registerUserFormControls['cellphone'].dirty || registerUserFormControls['cellphone'].touched)">
                                             The "cellphone" field is <strong>required</strong>
@@ -54,11 +58,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Mailing Address</mat-label>
                                         <input id="mailingAdd" matInput formControlName="mailingAdd" placeholder="Mailing Address" type="input" autocomplete="nope">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Profile</mat-label>
                                         <input id="profileName" matInput formControlName="profileName" placeholder="Profile" type="input" autocomplete="nope" readonly>
                                     </mat-form-field>
                                 </div>
@@ -66,6 +72,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Nmls</mat-label>
                                         <input id="nmls" matInput formControlName="nmls" placeholder="Nmls" type="input" autocomplete="nope">
                                     </mat-form-field>
                                 </div>
@@ -77,6 +84,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Password</mat-label>
                                         <input matInput formControlName="password" placeholder="Password" type="password" autocomplete="off">
                                         <mat-error *ngIf="registerUserFormControls['password'].hasError('required') && (registerUserFormControls['password'].dirty || registerUserFormControls['password'].touched)">
                                             Password is <strong>required</strong>
@@ -85,6 +93,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field>
+                                        <mat-label>Confirm Password</mat-label>
                                         <input matInput formControlName="confirmPassword" placeholder="Confirm Password" type="password" autocomplete="off">
                                         <mat-error *ngIf="registerUserFormControls['confirmPassword'].hasError('required') && (registerUserFormControls['confirmPassword'].dirty || registerUserFormControls['confirmPassword'].touched)">
                                             Confirm password is <strong>required</strong>
